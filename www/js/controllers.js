@@ -130,10 +130,11 @@ angular.module('starter.controllers', [])
         promise.then(
             function(result) {
                 if (result.error == false) {
+                    console.log(result);
                     var d = new Date();
                     $scope.message = '<table>' +
                         '<tbody>' +
-                        '<tr><td>Lot No:</td><td>&nbsp;</td><td>' + result.record.lot_no + '</td></tr>' +
+                        '<tr><td>Lot No:</td><td>&nbsp;</td><td>' + result.result.lot_no + '</td></tr>' +
                         '</tbody>' +
                         '</table>';
                 } else {
