@@ -27,17 +27,18 @@ angular.module('starter.controllers', [])
     };
 
     todoDb.changes({
-        since: 'now',
+        // since: 'now',
         live: true,
         onChange: function(change) {
-            console.log(change);
             todoDb.get(change.id, function(err, doc) {
-                if (err) console.log(err);
-                console.log(doc);
-                if (doc.type === 'grv_item') {
-                    $scope.$apply(function() {
-                        $scope.lots.push(doc);
-                    });
+                if (!change.deleted) {
+                    if (doc && doc.type) {
+                        if (doc.type === 'grv_item') {
+                            $scope.$apply(function() {
+                                $scope.lots.push(doc);
+                            });
+                        }
+                    }
                 }
 
             })
@@ -45,21 +46,23 @@ angular.module('starter.controllers', [])
         }
     });
 
-    todoDb.query('receiving/get_all_lot_numbers', function(err, response) {
-        console.log(err);
-        console.log(response);
-        if (typeof response != 'undefined') {
-            var result = response.rows;
-            for (var i = 0; i < result.length; i++) {
-                $scope.lots.push(result[i].value);
-            }
-            console.log($rootScope.lots)
-        }
-        $scope.$apply(function() {
-            $scope.lots = $scope.lots;
-        });
+    // todoDb.query('receiving/get_all_lot_numbers', function(err, response) {
+    //     console.log(err);
+    //     console.log(response);
+    //     if (typeof response != 'undefined') {
+    //         var result = response.rows;
+    //         for (var i = 0; i < result.length; i++) {
+    //             $scope.lots.push(result[i].value);
+    //         }
+    //         console.log($rootScope.lots)
+    //     }
+    //     $scope.$apply(function() {
+    //         $scope.lots = $scope.lots;
+    //     });
 
-    });
+    // });
+
+
 
 
 })
