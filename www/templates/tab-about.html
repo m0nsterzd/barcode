@@ -1,22 +1,20 @@
-<ion-view title="About">
-  <ion-content class="has-header padding">
-    <div style="margin-top: 5px;">&nbsp;</div>
-    <p>
-      This app demonstrates how the phonegap barcode scanner plugin works.
-    </p>
-    <p>
-      To scan, click the scan button and point your phone camera at the
-      barcode. It will automatically detect it and display the information.
-    </p>
-    <p>
-      You can use the source code as a template to incorporate the
-      phonegap barcode scanner plugin into your application and use
-      the <a href="http://build.phonegap.com">http://build.phonegap.com</a>
-      service to compile it.
-    </p>
-    <p>
-      The source code is available under the MIT license from my github
-      account: <a href="https://github.com/jlinoff/PgBarcodeScanner">https://github.com/jlinoff/PgBarcodeScanner.git</a>.
-    </p>
-  </ion-content>
+<ion-header-bar class="bar-positive">
+    <h4 class="">Status
+        <span ng-bind="syncstatus"></span>
+    </h4>
+    <h1 class="title">About</h1>
+    <button class="button button-icon" ng-click="toggleOnline()">
+        <i class="icon" ng-class="{'ion-connection-bars' : online, 'ion-alert-circled' : !online}"></i>
+    </button>
+</ion-header-bar>
+<ion-view hide-nav-bar="true">
+    <ion-content class="has-header padding">
+        <div style="margin-top: 5px;">&nbsp;</div>
+        <p>
+            This app demonstrates how Gavelmate will scan lot numbers.
+        </p>
+        <p>
+            To scan, click the scan button and point your phone camera at the barcode. It will automatically detect it and display the information.
+        </p>
+    </ion-content>
 </ion-view>

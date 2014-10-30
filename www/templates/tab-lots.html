@@ -1,0 +1,22 @@
+<ion-header-bar class="bar-positive">
+    <h4 class="">Status
+        <span ng-bind="syncstatus"></span>
+    </h4>
+    <h1 class="title">Lots</h1>
+    <button class="button button-icon" ng-click="toggleOnline()">
+        <i class="icon" ng-class="{'ion-connection-bars' : online, 'ion-alert-circled' : !online}"></i>
+    </button>
+</ion-header-bar>
+<ion-view hide-nav-bar="true">
+    <ion-content class="has-header padding">
+        <div class="list">
+            <label class="bar bar-header item-input-inset">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="Search" ng-model="search">
+            </label>
+            <div ng-repeat="lot in lots | filter:search" class="item" ng-click="lotSelect(lot)">
+                <strong>#&nbsp;{{lot.lot_no}}</strong>&nbsp;-&nbsp;{{lot.category}}
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
