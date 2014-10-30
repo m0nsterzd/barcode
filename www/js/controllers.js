@@ -114,7 +114,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ScanCtrl', function($scope, appServices, $rootScope, $location) {
+.controller('ScanCtrl', function($scope, appServices) {
     $scope.message = '';
     $scope.click = function() {
         var promise = appServices.scanBarcode();
@@ -122,21 +122,11 @@ angular.module('starter.controllers', [])
             function(result) {
                 if (result.error == false) {
                     var d = new Date();
-                    var barcode = parseInt(result.result.text);
-                    todoDb.query('receiving/get_lot_by_barcode', {
-                        key: barcode
-                    }, function(err, response) {
-                        alert(response);
-                        if (typeof response != 'undefined') {
-                            var record = response.rows[0].value;
-                            $scope.message = '<table>' +
-                                '<tbody>' +
-                                '<tr><td>Lot No:</td><td>&nbsp;</td><td>' + record.lot_no + '</td></tr>' +
-                                '</tbody>' +
-                                '</table>';
-                        }
-                    });
-
+                    $scope.message = '<table>' +
+                        '<tbody>' +
+                        '<tr><td>Lot No:</td><td>&nbsp;</td><td>' + result.lot_no + '</td></tr>' +
+                        '</tbody>' +
+                        '</table>';
                 } else {
                     $scope.message = '<b>ERROR</b>: ' + result;
                 }
