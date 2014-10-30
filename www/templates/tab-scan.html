@@ -1,18 +1,43 @@
 <ion-view title="Scan">
-  <ion-content class="has-header padding">
-    <div>
-      <button style="border-radius: 7px; width:100%; margin-left:auto; margin-right: auto;" class="button button-positive" ng-click="click()">
-	Click to Scan
-      </button>
-    </div>
+    <ion-content class="has-header padding">
+        <div>
+            <button style="border-radius: 7px; width:100%; margin-left:auto; margin-right: auto;" class="button button-positive" ng-click="click()">
+                Click to Scan
+            </button>
+        </div>
 
-    <div  style="margin-top: 5px;" ng-bind-html="message"></div>
+        <div style="margin-top: 5px;" ng-bind-html="message"></div>
+        <div class="list">
+            <div class="item">
+                <strong>Lot #&nbsp;</strong>{{lotscan.lot_no}}
+            </div>
+            <div class="item">
+                <strong>Location&nbsp;</strong>{{lotscan.lot_location}}
+            </div>
+            <div class="item">
+                <strong>Date&nbsp;</strong>{{lotscan.date_created}}
+            </div>
+            <div class="item">
+                <strong>Make / Model &nbsp;</strong>{{lotscan.make_model}}
+            </div>
+            <div class="item">
+                <strong>Description&nbsp;</strong>{{lotscan.description}}
+            </div>
+            <div class="item">
+                <strong>Requested Value&nbsp;</strong>${{lotscan.requested_value}}
+            </div>
+            <div class="item">
+                <strong>Reserve Value&nbsp;</strong>${{lotscan.reserve}}
+            </div>
+            <div class="item">
+                <strong>Assigned Value&nbsp;</strong>${{lotscan.assigned_value}}
+            </div>
+        </div>
+        <div style="margin-top: 5px;" ng-show="message.length!=0">
+            <button style="border-radius: 7px; width:100%; margin-left:auto; margin-right: auto;" class="button button-positive" ng-click="clear()">
+                Clear Message
+            </button>
+        </div>
 
-    <div style="margin-top: 5px;" ng-show="message.length!=0">
-      <button style="border-radius: 7px; width:100%; margin-left:auto; margin-right: auto;" class="button button-positive" ng-click="clear()">
-	Clear Message
-      </button>
-    </div>
-
-  </ion-content>
+    </ion-content>
 </ion-view>

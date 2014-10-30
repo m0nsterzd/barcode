@@ -130,13 +130,15 @@ angular.module('starter.controllers', [])
         promise.then(
             function(result) {
                 if (result.error == false) {
-                    console.log(result);
                     var d = new Date();
                     $scope.message = '<table>' +
                         '<tbody>' +
                         '<tr><td>Lot No:</td><td>&nbsp;</td><td>' + result.result.lot_no + '</td></tr>' +
                         '</tbody>' +
                         '</table>';
+                    $scope.$apply(function() {
+                        $scope.lotscan = result.result;
+                    });
                 } else {
                     $scope.message = '<b>ERROR</b>: ' + result;
                 }
