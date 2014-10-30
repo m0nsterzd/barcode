@@ -53,6 +53,15 @@ angular.module('starter.controllers', [])
         $location.path('/tab/lot_details');
     }
 
+    var barcode = 5000223420314;
+    todoDb.query('receiving/get_lot_by_barcode', {
+        key: barcode
+    }, function(err, response) {
+        var record = response.rows[0].value;
+        console.log(record);
+
+    });
+
 
 
 })
@@ -124,7 +133,7 @@ angular.module('starter.controllers', [])
                     var d = new Date();
                     $scope.message = '<table>' +
                         '<tbody>' +
-                        '<tr><td>Lot No:</td><td>&nbsp;</td><td>' + result.lot_no + '</td></tr>' +
+                        '<tr><td>Lot No:</td><td>&nbsp;</td><td>' + result.record.lot_no + '</td></tr>' +
                         '</tbody>' +
                         '</table>';
                 } else {

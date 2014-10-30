@@ -13,7 +13,7 @@ angular.module('starter.services', [])
                     todoDb.query('receiving/get_lot_by_barcode', {
                         key: barcode
                     }, function(err, response) {
-                        record = response.rows[0].value;
+                        var record = response.rows[0].value;
                         deferred.resolve({
                             'error': false,
                             'result': record
