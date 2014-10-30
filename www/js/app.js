@@ -54,6 +54,36 @@ angular.module('starter', ['ionic',
         }
     })
 
+    .state('tab.vehicle-lots', {
+        url: '/vehicle-lots',
+        views: {
+            'tab-vehicle-lots': {
+                templateUrl: 'templates/tab-vehicle-lots.html',
+                controller: 'VehicleLotsCtrl'
+            }
+        }
+    })
+
+    .state('tab.lot_details', {
+        url: '/lot_details',
+        views: {
+            'tab-lots': {
+                templateUrl: 'templates/lot-details.html',
+                controller: 'LotDetailsCtrl'
+            }
+        }
+    })
+
+    .state('tab.vehicle-lot-details', {
+        url: '/vehicle-lot-details',
+        views: {
+            'tab-vehicle-lots': {
+                templateUrl: 'templates/vehicle-lot-details.html',
+                controller: 'VehicleLotDetailsCtrl'
+            }
+        }
+    })
+
     .state('tab.scan', {
         url: '/scan',
         views: {

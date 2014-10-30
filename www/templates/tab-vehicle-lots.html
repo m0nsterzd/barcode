@@ -1,5 +1,5 @@
 <ion-header-bar class="bar-positive">
-    <h1 class="title">Lots
+    <h1 class="title">Vehicle Lots
         <span ng-bind="syncstatus"></span>
     </h1>
     <button class="button button-icon" ng-click="toggleOnline()">
@@ -14,7 +14,7 @@
                 <input type="search" placeholder="Search" ng-model="search">
             </label>
             <div ng-repeat="lot in lots | filter:search" class="item" ng-click="lotSelect(lot)">
-                <strong>#&nbsp;{{lot.lot_no}}</strong>&nbsp;-&nbsp;{{lot.category}}&nbsp;-&nbsp;${{lot.assigned_value}}
+                <strong>#&nbsp;{{lot.lot_no}}</strong>&nbsp;-&nbsp;{{lot.make_model}}&nbsp;-&nbsp;${{lot.assigned_value}}
             </div>
         </div>
     </ion-content>

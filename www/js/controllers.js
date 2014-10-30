@@ -1,15 +1,16 @@
 angular.module('starter.controllers', [])
 
-.controller('LotsCtrl', function($scope, todoDb, $rootScope) {
+.controller('LotsCtrl', function($scope, todoDb, $rootScope, $location) {
 
     $scope.lots = [];
     $scope.online = false;
     $scope.syncstatus = "Offline";
+    $rootScope.lot = '';
     $scope.toggleOnline = function() {
         $scope.online = !$scope.online;
         if ($scope.online) { // Read http://pouchdb.com/api.html#sync
             $scope.syncstatus = "Online";
-            $scope.sync = todoDb.sync('http://192.168.100.220:5984/gavelmate', {
+            $scope.sync = todoDb.sync('http://clubit.graymata.com:5984/gavelmate', {
                     live: true
                 })
                 .on('error', function(err) {
@@ -46,22 +47,68 @@ angular.module('starter.controllers', [])
         }
     });
 
-    // todoDb.query('receiving/get_all_lot_numbers', function(err, response) {
-    //     console.log(err);
-    //     console.log(response);
-    //     if (typeof response != 'undefined') {
-    //         var result = response.rows;
-    //         for (var i = 0; i < result.length; i++) {
-    //             $scope.lots.push(result[i].value);
-    //         }
-    //         console.log($rootScope.lots)
-    //     }
-    //     $scope.$apply(function() {
-    //         $scope.lots = $scope.lots;
-    //     });
+    $scope.lotSelect = function(lot) {
+        // console.log(lot);
+        $rootScope.lot = lot;
+        $location.path('/tab/lot_details');
+    }
 
-    // });
 
+
+})
+
+.controller('VehicleLotsCtrl', function($scope, todoDb, $rootScope, $location) {
+
+    $scope.lots = [];
+    $scope.online = false;
+    $scope.syncstatus = "Offline";
+    $rootScope.vehiclelot = '';
+    $scope.toggleOnline = function() {
+        $scope.online = !$scope.online;
+        if ($scope.online) { // Read http://pouchdb.com/api.html#sync
+            $scope.syncstatus = "Online";
+            $scope.sync = todoDb.sync('http://clubit.graymata.com:5984/gavelmate', {
+                    live: true
+                })
+                .on('error', function(err) {
+                    console.log("Syncing stopped");
+
+                    $scope.$apply(function() {
+                        $scope.syncstatus = err.statusText;
+                    });
+                    console.log(err);
+                });
+        } else {
+            $scope.sync.cancel();
+            $scope.syncstatus = "Offline";
+        }
+    };
+
+    todoDb.changes({
+        // since: 'now',
+        live: true,
+        onChange: function(change) {
+            todoDb.get(change.id, function(err, doc) {
+                if (!change.deleted) {
+                    if (doc && doc.type) {
+                        if (doc.type === 'grv_vehicle') {
+                            $scope.$apply(function() {
+                                $scope.lots.push(doc);
+                            });
+                        }
+                    }
+                }
+
+            })
+
+        }
+    });
+
+    $scope.lotSelect = function(lot) {
+        // console.log(lot);
+        $rootScope.vehiclelot = lot;
+        $location.path('/tab/vehicle-lot-details');
+    }
 
 
 
@@ -107,7 +154,7 @@ angular.module('starter.controllers', [])
         $scope.online = !$scope.online;
         if ($scope.online) { // Read http://pouchdb.com/api.html#sync
             $scope.syncstatus = "Online";
-            $scope.sync = todoDb.sync('http://192.168.100.220:5984/gavelmate', {
+            $scope.sync = todoDb.sync('http://clubit.graymata.com:5984/gavelmate', {
                     live: true
                 })
                 .on('error', function(err) {
@@ -123,5 +170,15 @@ angular.module('starter.controllers', [])
             $scope.syncstatus = "Offline";
         }
     };
+
+})
+
+.controller('LotDetailsCtrl', function($scope, todoDb, $rootScope) {
+
+
+})
+
+.controller('VehicleLotDetailsCtrl', function($scope, todoDb, $rootScope) {
+
 
 })
