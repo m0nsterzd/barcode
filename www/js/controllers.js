@@ -114,7 +114,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ScanCtrl', function($scope, appServices) {
+.controller('ScanCtrl', function($scope, appServices, $rootScope, $location) {
     $scope.message = '';
     $scope.click = function() {
         var promise = appServices.scanBarcode();
@@ -122,14 +122,28 @@ angular.module('starter.controllers', [])
             function(result) {
                 if (result.error == false) {
                     var d = new Date();
-                    $scope.message = '<table>' +
-                        '<tbody>' +
-                        '<tr><td>Timestamp:</td><td>&nbsp;</td><td>' + d.toUTCString() + '</td></tr>' +
-                        '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.text + '</td></tr>' +
-                        '<tr><td>Format:</td><td>&nbsp;</td><td>' + result.result.format + '</td></tr>' +
-                        '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.cancelled + '</td></tr>' +
-                        '</tbody>' +
-                        '</table>';
+                    console.log(result);
+                    var barcode = parseInt(result.result.text);
+                    todoDb.query('receiving/get_lot_by_barcode', function(err, response) {
+                        if (typeof response != 'undefined') {
+                            var result = response.rows[0];
+                            $scope.$apply(function() {
+                                $rootScope.vehiclelot = result.value;
+                                $location.path('/tab/vehicle-lot-details');
+                            });
+                        }
+
+
+                    });
+                    // $scope.message = '<table>' +
+                    //     '<tbody>' +
+                    //     '<tr><td>Timestamp:</td><td>&nbsp;</td><td>' + d.toUTCString() + '</td></tr>' +
+                    //     '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.text + '</td></tr>' +
+                    //     '<tr><td>Format:</td><td>&nbsp;</td><td>' + result.result.format + '</td></tr>' +
+                    //     '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.cancelled + '</td></tr>' +
+                    //     '</tbody>' +
+                    //     '</table>';
+
                 } else {
                     $scope.message = '<b>ERROR</b>: ' + result;
                 }
