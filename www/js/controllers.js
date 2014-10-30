@@ -139,14 +139,14 @@ angular.module('starter.controllers', [])
 
                     $scope.message = ' <div class = "list">' +
                         '<div class = "item ng-binding">' +
-                        '<strong> Lot# & nbsp; </strong>' + result.result.lot_no + '</div> <div class = "item ng-binding" >' +
-                        '<strong> Location & nbsp; </strong>' + result.result.location + '</div> < div class = "item ng-binding" >' +
-                        '<strong> Date & nbsp; </strong>' + result.result.date_created + '</div> < div class = "item ng-binding" >' +
-                        '<strong> Make Model & nbsp; </strong>' + result.result.make_model + '</div> <div class = "item ng-binding" >' +
-                        '<strong> Description & nbsp; </strong>' + result.result.description + '</div> <div class = "item ng-binding" >' +
-                        '<strong> Requested Value & nbsp; </strong>' + result.result.requested_value + '</div> <div class = "item ng-binding" >' +
-                        '<strong> Reserve Value & nbsp; </strong>' + result.result.reserve + '</div> <div class = "item ng-binding" >' +
-                        '<strong> Assigned Value & nbsp; </strong>' + result.result.assigned_value + '</div> </div>'
+                        '<strong> Lot# &nbsp; </strong>' + result.result.lot_no + '</div> <div class = "item ng-binding" >' +
+                        '<strong> Location &nbsp; </strong>' + result.result.location + '</div> < div class = "item ng-binding" >' +
+                        '<strong> Date &nbsp; </strong>' + result.result.date_created + '</div> < div class = "item ng-binding" >' +
+                        '<strong> Make Model &nbsp; </strong>' + result.result.make_model + '</div> <div class = "item ng-binding" >' +
+                        '<strong> Description &nbsp; </strong>' + result.result.description + '</div> <div class = "item ng-binding" >' +
+                        '<strong> Requested Value &nbsp; </strong>' + result.result.requested_value + '</div> <div class = "item ng-binding" >' +
+                        '<strong> Reserve Value &nbsp; </strong>' + result.result.reserve + '</div> <div class = "item ng-binding" >' +
+                        '<strong> Assigned Value &nbsp; </strong>' + result.result.assigned_value + '</div> </div>'
                 } else {
                     $scope.message = '<b>ERROR</b>: ' + result;
                 }
