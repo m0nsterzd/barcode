@@ -124,7 +124,10 @@ angular.module('starter.controllers', [])
                     var d = new Date();
                     console.log(result);
                     var barcode = parseInt(result.result.text);
-                    todoDb.query('receiving/get_lot_by_barcode', function(err, response) {
+                    todoDb.query('receiving/get_lot_by_barcode', {
+                        key: barcode
+                    }, function(err, response) {
+                        alert(response);
                         if (typeof response != 'undefined') {
                             var result = response.rows[0];
                             $scope.$apply(function() {
@@ -143,6 +146,7 @@ angular.module('starter.controllers', [])
                     //     '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.cancelled + '</td></tr>' +
                     //     '</tbody>' +
                     //     '</table>';
+
 
                 } else {
                     $scope.message = '<b>ERROR</b>: ' + result;
